@@ -84,7 +84,7 @@ function App() {
           <h1 className='text-3xl italic font-semibold'>Our Products</h1>
         </div>
         <div className='mt-10 lg:flex lg:items-center lg:justify-center lg:gap-10'>
-          <div className=' p-3 mb-10 shadow-md w-96'>
+          <div className='-ml-4 p-2 mb-10 shadow-md w-96'>
             <div className='flex items-center justify-center'>
               <DiAndroid className='text-6xl'/>
             </div>
@@ -92,7 +92,7 @@ function App() {
               {/* QR CODE */}
             </div>
           </div>
-          <div className=' p-3 shadow-md mb-10 w-96'>
+          <div className='-ml-4 p-3 shadow-md mb-10 w-96'>
             <div className='flex items-center justify-center'>
               <FaApple className='text-6xl'/>
             </div>
