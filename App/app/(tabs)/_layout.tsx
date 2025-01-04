@@ -19,6 +19,7 @@ export default function RootLayout() {
             options={{
                 title: 'Explore',
                 tabBarIcon: ({ color }) => <FontAwesome size={28} name="search" color={color}/>,
+                headerShown:false
             }}    
         />
         <Tabs.Screen 
@@ -26,6 +27,9 @@ export default function RootLayout() {
             options={{
                 title: 'Feed',
                 tabBarIcon: ({ color }) => <FontAwesome size={26} name="bell" color={color}/>,
+                headerTitle:'Your Feed',
+                headerTitleStyle:{color:'white'},
+                headerStyle:{backgroundColor:'#041d29'}
             }}    
         />
         <Tabs.Screen 
@@ -33,6 +37,8 @@ export default function RootLayout() {
             options={{
                 title: 'Me',
                 tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color}/>,
+                headerTitleStyle:{color:'white'},
+                headerStyle:{backgroundColor:'#041d29'},
             }}    
         />
     </Tabs>

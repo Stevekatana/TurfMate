@@ -1,22 +1,40 @@
+import { FontAwesome } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import { Button, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
   return (
     <ScrollView style={styles.container}>
+      {/* card component */}
       <View style={styles.cardContainer}>
         <Image source={require('../../assets/images/placeholder.jpg')} style={styles.cardImage}/>
         <View>
           <Text style={styles.turfTitle}>777 turf</Text>
 
           <View style={styles.flexZone}>
-            <Text style={styles.location}>Location:</Text>
-            <Text style={styles.locationVar}>Syokimau</Text>
+            <View>
+              <Text style={styles.location}>Location:</Text>
+              <Text style={styles.locationVar}>Syokimau</Text>
+            </View>
+            <View>
+              <Text style={styles.location}>Price:</Text>
+              <Text style={styles.locationVar}>2000/=</Text>
+            </View>
+          </View>
+          <View>
+            <Text style={styles.descriptionTitle}>Description:</Text>
+            <Text style={styles.description}>
+              Its a really fun turf guys
+            </Text>
           </View>
         </View>
         <View style={styles.btnContainer}>
-          <Pressable style={styles.bookBtn}>
-            <Text>Book Now</Text>
-          </Pressable>
+          <Link href="/viewMore" asChild>
+            <Pressable style={styles.bookBtn}>
+              <Text style={styles.btnText}>View more</Text>
+            </Pressable>
+          </Link>
+          <FontAwesome name="heart-o" size={24} color="black" />
         </View>
       </View>
     </ScrollView>
@@ -32,7 +50,7 @@ const styles = StyleSheet.create({
   cardContainer:{
     height:'auto',
     borderRadius: 10,
-    padding:10,
+    padding:15,
   },
   cardImage:{
     height:200,
@@ -46,10 +64,43 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   flexZone:{
-    
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
   },
-  location:{},
-  locationVar:{},
-  btnContainer:{},
-  bookBtn:{}
+  location:{
+    width:'auto',
+    fontSize: 15,
+    marginRight: 20,
+    padding:1,
+    fontWeight:'bold'
+
+  },
+  locationVar:{
+    fontSize:15,
+    width:'auto',
+    padding:5
+  },
+  btnContainer:{
+    alignItems:'center',
+    marginTop:20,
+    flexDirection:'row', 
+    justifyContent:'space-between',
+  },
+  bookBtn:{ 
+    backgroundColor:'#041d29',
+    width:120,
+    padding:10,
+    borderRadius:10,
+  },
+  btnText:{
+    textAlign:'center',
+    color:'#15E6CD'
+  },
+  description:{},
+  descriptionTitle:{fontWeight:'bold'}
 })
+
+
+
+// #10445d, #041d29,15E6CD
