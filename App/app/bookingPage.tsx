@@ -1,8 +1,14 @@
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
+import DateTimePicker from '@react-native-community/datetimepicker'
+
 
 export default function bookingPage() {
+
+  function handlePress (){
+    console.log('Button Pressed')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.nameContainer}>
@@ -20,11 +26,12 @@ export default function bookingPage() {
       </View>
       <View style={styles.dateContainer}>
         <Text style={styles.dateTitle}>Date and Time:</Text>
+        <DateTimePicker mode='date' />
         <TextInput 
             style={styles.dateTI}/>
       </View>
       <View style={styles.btnContainer}>
-        <Pressable style={styles.btn}>
+        <Pressable style={styles.btn} onPress={handlePress}>
           <Text style={styles.btnText}>Submit</Text>
         </Pressable>
       </View>

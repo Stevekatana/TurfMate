@@ -1,0 +1,27 @@
+      {/* Products */}
+      <section ref={productRef} className='p-5 bg-slate-300'>
+        <div className='flex items-center justify-center p-3'>
+          <h1 className='text-3xl italic font-semibold'>Our Products</h1>
+        </div>
+        <div className='mt-10 lg:flex lg:items-center lg:justify-center lg:gap-10'>
+          <div className='-ml-4 p-2 mb-10 shadow-md w-96'>
+            <div className='flex items-center justify-center'>
+              <DiAndroid className='text-6xl'/>
+            </div>
+            <div>
+              {/* QR CODE */}
+            </div>
+          </div>
+          <div className='-ml-4 p-3 shadow-md mb-10 w-96'>
+            <div className='flex items-center justify-center'>
+              <FaApple className='text-6xl'/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+      
