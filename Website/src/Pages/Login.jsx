@@ -48,7 +48,7 @@ function Login() {
                 <div className='flex items-center justify-center gap-5'>
                     <input type="submit" value="Log In" className='bg-navBack text-awesome p-2 lg:rounded-md'/>
 
-                    <Link to={'/login'} className='text-xs italic'>Don't have an Account? Sign Up</Link>
+                    <Link to='/register' className='text-xs italic'>Don't have an Account? Sign Up</Link>
                 </div>
             </form>
         </div>

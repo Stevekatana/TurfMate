@@ -7,8 +7,9 @@ router.get('/', async (req,res)=>{
     res.json(feedback)
 })
 
-router.post('/new', (req,res)=>{
+router.post('/new', async(req,res)=>{
     const { bookerName, squadName, bookingDate, bookingDuration } = req.body
+
     const query = new bookingModel({ bookerName, squadName, bookingDate, bookingDuration })
     query.save()
     res.json(query)

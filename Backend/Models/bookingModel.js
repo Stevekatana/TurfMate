@@ -1,8 +1,20 @@
 const mongoose = require('mongoose')
+const Turf = require('./turfModel')
+const Owner = require('./ownerModel')
+const User = require('./userModel')
+
 const bookingSchema = new mongoose.Schema({
-    bookerName:{
+    turfId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "Turf"
+    },
+    ownerID:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "Owner"
+    },
+    bookingName:{
         type:String,
-        required:true
+        ref: "User"
     },
     squadName:{
         type:String,
@@ -14,6 +26,10 @@ const bookingSchema = new mongoose.Schema({
     },
     bookingDuration:{
         type:String,
+        required:true
+    },
+    bookingSerialNo:{
+        type:Number,
         required:true
     }
 })

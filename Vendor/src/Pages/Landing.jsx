@@ -1,13 +1,25 @@
 import React from 'react'
 import { useState, useEffect} from 'react'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Landing() {
   const [landingData, setLandingData] = useState({})
+  const navigate = useNavigate()
   useEffect(()=>{
+    checkLogin()
     fetchOwnerData()
   },[])
+
+  
+  function checkLogin(){
+    const token = localStorage.getItem("ownerToken")
+    if(!token){
+      navigate('/login')
+    }else{
+      fetchOwnerData()
+    }
+  }
   
   async function fetchOwnerData(){
     try{

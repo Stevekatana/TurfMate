@@ -16,7 +16,6 @@ function ViewListing() {
     Axios.get('http://localhost:5000/turfs/getData/'+id)
       .then(res=>{
         res = res.data
-        console.log(res)
         setData(res)
       })
       .catch(err => console.log(err))
@@ -63,7 +62,7 @@ function ViewListing() {
       </section>
 
       <div className='flex items-center justify-center mt-3 mb-2'>
-        <Link to='/booking' className='bg-navBack text-awesome p-2 rounded-md'>Book Turf</Link>
+        <Link to={`/booking/${data._id}`} className='bg-navBack text-awesome p-2 rounded-md'>Book Turf</Link>
       </div>
     </div>
   )

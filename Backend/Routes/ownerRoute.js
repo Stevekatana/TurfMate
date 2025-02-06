@@ -31,7 +31,6 @@ router.post('/login', async(req,res)=>{
     if(!isMatch) return res.status(400).json({message:"Invalid credentials"})
     
     const token = jwt.sign({id: owner._id}, process.env.SECRET_KEY)
-    console.log(token,'....', token.id)
     res.json({owner, token})
 })
 

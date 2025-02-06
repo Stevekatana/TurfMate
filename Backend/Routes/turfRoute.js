@@ -12,7 +12,6 @@ router.get('/', async(req,res)=>{
 router.get('/getData/:id', async(req,res)=>{
     const id = req.params.id
     const query = await turfModel.findById(id)
-    console.log(query)
     res.json(query)
 })
 

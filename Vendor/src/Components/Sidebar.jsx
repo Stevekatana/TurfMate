@@ -19,7 +19,6 @@ function Sidebar() {
 
   function handleLogOut(){
     localStorage.removeItem("ownerToken")
-    alert('LogOut Succesful')
     navigate("/login")
   }
   

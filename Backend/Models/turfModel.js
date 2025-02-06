@@ -20,7 +20,7 @@ const turfSchema = new mongoose.Schema({
     },
     turfOwner:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:Owner,
+        ref:"Owner",
     }
 })
 
