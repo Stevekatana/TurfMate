@@ -6,9 +6,9 @@ import Axios from 'axios'
 function BookingPage() {
     const navigate = useNavigate()
     const [data, setData] = useState([])
-    const [bookerName, setBookerName] = useState('')
+    // const [bookerName, setBookerName] = useState('')
     const [squadName, setSquadName] = useState('')
-    const [bookingDate, setBookingDate] = useState('')
+    let [bookingDate, setBookingDate] = useState('')
     const [bookingDuration, setBookingDuration] = useState('')
     const {id} = useParams()
   
@@ -27,9 +27,15 @@ function BookingPage() {
 
     function handleBooking(e){
         e.preventDefault()
+        const token = localStorage.getItem("token")
         const adjustedBookingDate = new Date(new Date(bookingDate).getTime() - new Date().getTimezoneOffset() * 60000).toISOString();
-        let[date,time] = adjustedBookingDate.split("T")
+        let[bookDate,bookTime] = adjustedBookingDate.split("T")
 
+        Axios.post('http://localhost:5000/booking/new/'+id, {squadName, bookDate, bookTime, bookingDuration}, {headers: {Authorization:`Bearer ${token}`}})
+            .then(res =>{
+                location.reload()
+            })
+            .catch(err =>console.log(err))
     }
 
   return (
@@ -48,7 +54,7 @@ function BookingPage() {
                     <input type="text" onChange={(e)=>{setSquadName(e.target.value)}} placeholder='Enter your Squad name' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
                 </div>
                 <div className='p-2 mb-3'>
-                    <input type="datetime-local" required onChange={(e)=>{setBookingDate(e.target.value)}} placeholder='Select Date and time' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
+                    <input type="datetime-local" onChange={(e)=>{setBookingDate(e.target.value)}} placeholder='Select Date and time' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
                 </div>
                 <div className='p-2 mb-3'>
                     <input type="text" onChange={(e)=>{setBookingDuration(e.target.value)}} placeholder="Duration of play" className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>

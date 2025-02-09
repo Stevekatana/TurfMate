@@ -15,7 +15,6 @@ function LogIn() {
       .then(res =>{
         res = res.data
         localStorage.setItem("ownerToken", res.token)
-        alert('Login succesful')
         navigate('/')
       })
       .catch(err =>{

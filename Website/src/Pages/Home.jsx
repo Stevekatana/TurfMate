@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import turf from '../assets/turf 1.png'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { DiAndroid } from "react-icons/di";
@@ -15,7 +15,7 @@ function Home() {
   const footerRef = useRef(null)
   const dropDown =document.querySelector('#dropDown')
   const navigate = useNavigate()
-
+  
   function handleDrop(){
     setActive(true)
     if(active == true){

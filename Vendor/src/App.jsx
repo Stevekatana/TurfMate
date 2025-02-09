@@ -6,13 +6,14 @@ import LogIn from './Pages/LogIn'
 import Profile from './Pages/Profile'
 import AddTurf from './Pages/AddTurf'
 import MyTurf from './Pages/MyTurfs'
-import SideBar from './Components/SideBar'
 import EditTurf from './Pages/EditTurf'
+import Sidebar from './Components/Sidebar'
+import Bookings from './Pages/Bookings'
 
 function App() {
   return (
     <div className='flex'>
-      <SideBar />
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<SignUp />} />
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/addTurf" element={<AddTurf />} />
         <Route path="/myTurf" element={<MyTurf />} />
+        <Route path="/bookings" element={<Bookings />}/>
         <Route path="/editturf:_id" element={<EditTurf />}/>
       </Routes>
     </div>

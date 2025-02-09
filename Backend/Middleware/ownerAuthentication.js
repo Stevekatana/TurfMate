@@ -9,7 +9,6 @@ async function authToken(req,res,next){
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY)
     req.owner = decoded
-    console.log(req.owner)
     next()
 }
 

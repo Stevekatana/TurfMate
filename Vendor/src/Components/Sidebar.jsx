@@ -4,6 +4,7 @@ import { RiDashboard3Fill } from "react-icons/ri"
 import { IoPersonSharp } from "react-icons/io5";
 import { FaBoltLightning } from "react-icons/fa6";
 import { TbSoccerField } from "react-icons/tb";
+import { IoIosBook } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
 import Turf from '../assets/turf.jpg'
@@ -59,6 +60,12 @@ function Sidebar() {
                   <Link to='/' className='text-xl flex items-center justify-start mb-3 hover:underline'>
                     <RiDashboard3Fill className='mr-2'/>
                     Dashboard
+                  </Link>
+              </li>
+              <li>
+                  <Link to='/bookings' className='text-xl flex items-center justify-start mb-3 hover:underline'>
+                    <IoIosBook  className='mr-2 text-xl'/>
+                    My Bookings
                   </Link>
               </li>
               <li>

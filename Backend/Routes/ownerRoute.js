@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const ownerModel = require('../Models/ownerModel')
 const ownerAuth = require('../Middleware/ownerAuthentication')
 
@@ -31,6 +31,7 @@ router.post('/login', async(req,res)=>{
     if(!isMatch) return res.status(400).json({message:"Invalid credentials"})
     
     const token = jwt.sign({id: owner._id}, process.env.SECRET_KEY)
+    console.log(token)
     res.json({owner, token})
 })
 

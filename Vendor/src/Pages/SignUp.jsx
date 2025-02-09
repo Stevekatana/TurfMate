@@ -19,7 +19,6 @@ function SignUp() {
     }else{
       Axios.post('http://localhost:5000/owner/register',{ownerFirstName, ownerLastName, ownerEmail, ownerPhone, ownerPassword})
         .then(res =>{
-          alert('Registration Succesful')
           navigate('/login')
         })
         .catch(err =>{

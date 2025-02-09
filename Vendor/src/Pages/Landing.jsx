@@ -5,13 +5,15 @@ import { Link, useNavigate } from 'react-router-dom'
 
 function Landing() {
   const [landingData, setLandingData] = useState({})
+  const [bookings, setBookings] = useState([])
   const navigate = useNavigate()
+
   useEffect(()=>{
     checkLogin()
     fetchOwnerData()
+    loadBookings()
   },[])
 
-  
   function checkLogin(){
     const token = localStorage.getItem("ownerToken")
     if(!token){
@@ -36,31 +38,47 @@ function Landing() {
       console.error("Error fetching owner data", error);
     }
   }
+
+  async function loadBookings(){
+    const token = localStorage.getItem('ownerToken')
+    await Axios.get('http://localhost:5000/booking/mybookings', {headers:{Authorization:`Bearer ${token}`}})
+      .then(res=>{
+        res = res.data
+        setBookings(res)
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
+
     <div className=' p-5 bg-gray-100 w-full h-screen'>
       <div>
         <h1 className='text-3xl'>Welcome Back, {landingData.ownerFirstName}</h1>
       </div>
       
       {/* Bookings */}
-      <div className='bg-white p-3 rounded-md mt-8 h-64 '>
+      <div className='bg-white p-3 rounded-md mt-8 h-[300px] '>
         <div className='ml-5'>
           <h3 className='text-xl'>Bookings</h3>
         </div>
-        <div className='ml-5 mt-4 pb-3'>
-          <ul>
-            <li className='bg-gray-800 p-1 rounded-md'>
-              <Link>
-                <h2 className='text-white'><b>Steve</b> made a Booking at 777 turf</h2>
-                <p className='text-gray-500'>Tap for more details</p>
-              </Link>
-            </li>
+          <ul className='ml-5 mt-4 pb-1 overflow-y-scroll h-[230px]'>
+            {
+              bookings.map((bookings)=>{
+                return(
+                  <li className='bg-gray-800 p-1 rounded-md mb-2' key={bookings._id}>
+                    <Link>
+                      <h2 className='text-white'><b>{bookings.bookerName}</b> made a Booking at {bookings.turfNAME}</h2>
+                      <Link to='/bookings' className='text-gray-500'>Tap for more details</Link>
+                    </Link>
+                  </li>
+                )
+              })
+            }
           </ul>
-        </div>
       </div>
 
       {/* Messages */}
-      <div className='bg-white p-3 rounded-md mt-8 h-72'>
+      <div className='bg-white p-3 rounded-md mt-8 h-1/2'>
         <div className='ml-5'>
           <h3 className='text-xl'>Messages</h3>
         </div>
