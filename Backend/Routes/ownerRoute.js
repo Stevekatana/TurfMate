@@ -31,7 +31,6 @@ router.post('/login', async(req,res)=>{
     if(!isMatch) return res.status(400).json({message:"Invalid credentials"})
     
     const token = jwt.sign({id: owner._id}, process.env.SECRET_KEY)
-    console.log(token)
     res.json({owner, token})
 })
 
@@ -40,7 +39,6 @@ router.get('/profile', ownerAuth, async (req, res) => {
         const id = req.owner.id
         const data = await ownerModel.findById(id).select("-ownerPassword");
         if (!data) return res.status(404).json({ message: "Owner Not Found!!" });
-
         res.json(data);
     } catch (error) {
         console.error("Profile Fetch Error:", error);

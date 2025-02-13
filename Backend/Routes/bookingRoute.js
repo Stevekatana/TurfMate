@@ -23,7 +23,6 @@ router.get('/mybookings', ownerAuth, async(req,res)=>{
     try{
         const turfOwner = req.owner.id
         const bookingData = await bookingModel.find({ownerID: turfOwner})
-
         res.json(bookingData)
     }
     catch(error){
@@ -60,12 +59,15 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     const ownerAddress = await ownerModel.findById(ownerID).select('ownerEmail -_id')
     let address = ownerAddress.ownerEmail
 
+    const userEmail = await userModel.findById(userId).select('email -_id')
+    let userAddress = userEmail.email
+
     const bookingEmail = {
         from: process.env.EMAIL_USER,
-        // to: address,
-        to:"stevetradess502@gmail.com",
+        to: address,
+        cc:userAddress,
         subject: `${bookerName} made a booking to ${turfNAME}`,
-        text: `${bookerName} made a booking to ${turfNAME} for ${bookDate} at ${bookTime} for a duration of ${bookingDuration} hours`
+        text: `${bookerName} made a booking to ${turfNAME} for ${bookDate} at ${bookTime} for a duration of ${bookingDuration} hour(s)`
     }
     console.log(bookingEmail)
     // await transporter.sendMail(bookingEmail)

@@ -30,14 +30,12 @@ function BookingPage() {
         const token = localStorage.getItem("token")
         const adjustedBookingDate = new Date(new Date(bookingDate).getTime() - new Date().getTimezoneOffset() * 60000).toISOString();
         let[bookDate,bookTime] = adjustedBookingDate.split("T")
-
-        // TODO: deal with this when you come back
-        console.log(bookTime)
-
+        let [hrs, mins] = bookTime.split(":")
+        bookTime = `${hrs}:${mins}`
 
         Axios.post('http://localhost:5000/booking/new/'+id, {squadName, bookDate, bookTime, bookingDuration}, {headers: {Authorization:`Bearer ${token}`}})
             .then(res =>{
-                // location.reload()
+                location.reload()
             })
             .catch(err =>console.log(err))
     }
