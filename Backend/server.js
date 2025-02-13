@@ -9,6 +9,7 @@ app.use(express.json())
 app.use(cors())
 dotenv.config()
 
+// TODO ENTER WEBSOCKETS
 
 // routes import
 const Users = require('./Routes/clientRoute')
@@ -19,6 +20,7 @@ app.use('/booking', Bookings)
 app.use('/owner', Owner)
 app.use('/users', Users)
 app.use('/turfs', Turfs)
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(console.log('Server-Db connection established:(^j^):'))

@@ -9,6 +9,7 @@ import MyTurf from './Pages/MyTurfs'
 import EditTurf from './Pages/EditTurf'
 import Sidebar from './Components/Sidebar'
 import Bookings from './Pages/Bookings'
+import ViewBooking from './Pages/ViewBooking'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/addTurf" element={<AddTurf />} />
         <Route path="/myTurf" element={<MyTurf />} />
         <Route path="/bookings" element={<Bookings />}/>
+        <Route path='/viewbooking' element={<ViewBooking />}/>
         <Route path="/editturf:_id" element={<EditTurf />}/>
       </Routes>
     </div>
