@@ -25,24 +25,42 @@ function ViewListing() {
       navigate('/listing')
   }
   return (
-    <div>
-      <section className='lg:border-b-gray-300 lg:border-b-2'> 
+    <div className='lg:h-full bg-red-500'>
+      <section className='lg:border-b-gray-300 lg:border-b-2' > 
         <div className='absolute top-6 left-6 '>
           <IoArrowBack className='text-3xl' onClick={backHome}/>
         </div>
-        <div className='flex items-center justify-center mt-[70px] lg:justify-start lg:p-3'>
-            <img src={turf} alt="image not found" className='w-80 rounded-md  lg:ml-[90px]'/>
+        <div className='flex items-center justify-center mt-[70px] lg:justify-start lg:p-3 lg:w-[500px]'>
+            <img src={turf} alt="image not found" className='w-80 rounded-md lg:ml-[90px]'/>
             <div className='absolute top-[300px] lg:top-[180px] lg:left-[500px] lg:text-4xl'>
               <h1 className='text-3xl text-center font-semibold uppercase'>{data.turfName}</h1>
             </div>
         </div>
       </section>
-      <section className='mt-[70px] lg:flex lg:items-center lg:justify-center bg-gray-200'>
-        <div className='lg:flex lg:justify-around lg:items-center lg:p-3 lg:w-[700px]'>
-          <div className=' text-center font-semibold lg:p-3 lg:w-[400px] lg:h-auto rounded-md bg-white mt-2'>
+
+      {/* details section */}
+      <section className='lg:flex lg:items-center lg:justify-center bg-gray-200 lg:h-full'>
+        <div className='lg:flex lg:justify-evenly lg:items-center lg:p-0 lg:w-[700px]'>
+
+          <div className=' text-center font-semibold lg:p-0 lg:w-[800px] lg:h-full rounded-md bg-white mt-2'>
             <h3>Description:</h3>
             <p className='mt-1 text-center font-normal'>{data.turfDescription}</p>
           </div>
+
+          <div className='bg-white'>
+            <table>
+              <thead>
+                <th>Date</th>
+                <th>time</th>
+              </thead>
+              <tbody>
+                <tr></tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
           <div className='text-center mt-10 lg:ml-10 p-2 lg:mt-0 lg:w-[400px] lg:h-auto rounded-md bg-white'>
             <div>
               <span className='font-semibold'>Location:</span>

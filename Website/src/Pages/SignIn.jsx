@@ -17,11 +17,11 @@ function SignIn() {
     }
 
     function handleSignIn(e){
-        e.preventDefault()
+        e.preventDefault()        
         if(password !=confPass){
             alert('Passwords dont match')
         }else{
-            Axios.post('http://localhost:5000/users/register',{username, email, phone, password})
+            Axios.post('http://192.168.100.50:5000/users/register',{username, email, phone, password})
                 .then(res => {
                     console.log(res)
                     navigate('/login')

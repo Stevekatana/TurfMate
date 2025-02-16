@@ -23,15 +23,15 @@ const bookingSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    bookTime:{
+    startTime:{
+        type:String,
+        required:true
+    },
+    endTime:{
         type:String,
         required:true
     },
     bookLocation:{
-        type:String,
-        required:true
-    },
-    bookingDuration:{
         type:String,
         required:true
     },

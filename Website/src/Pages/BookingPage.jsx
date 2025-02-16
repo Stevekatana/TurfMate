@@ -6,10 +6,10 @@ import Axios from 'axios'
 function BookingPage() {
     const navigate = useNavigate()
     const [data, setData] = useState([])
-    // const [bookerName, setBookerName] = useState('')
     const [squadName, setSquadName] = useState('')
-    let [bookingDate, setBookingDate] = useState('')
-    const [bookingDuration, setBookingDuration] = useState('')
+    const [bookDate, setBookDate] = useState('')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
     const {id} = useParams()
   
     useEffect(()=>{
@@ -28,14 +28,16 @@ function BookingPage() {
     function handleBooking(e){
         e.preventDefault()
         const token = localStorage.getItem("token")
-        const adjustedBookingDate = new Date(new Date(bookingDate).getTime() - new Date().getTimezoneOffset() * 60000).toISOString();
-        let[bookDate,bookTime] = adjustedBookingDate.split("T")
-        let [hrs, mins] = bookTime.split(":")
-        bookTime = `${hrs}:${mins}`
 
-        Axios.post('http://localhost:5000/booking/new/'+id, {squadName, bookDate, bookTime, bookingDuration}, {headers: {Authorization:`Bearer ${token}`}})
+        // const adjustedBookingDate = new Date(new Date(bookingDate).getTime() - new Date().getTimezoneOffset() * 60000).toISOString();
+        // let[bookDate,bookTime] = adjustedBookingDate.split("T")
+        // let [hrs, mins] = bookTime.split(":")
+        // bookTime = `${hrs}:${mins}`
+
+        Axios.post('http://localhost:5000/booking/new/'+id, {squadName, bookDate, startTime, endTime}, {headers: {Authorization:`Bearer ${token}`}})
             .then(res =>{
-                location.reload()
+                console.log(res)
+                // location.reload()
             })
             .catch(err =>console.log(err))
     }
@@ -52,14 +54,21 @@ function BookingPage() {
         </section>
         <section className='flex items-center justify-center mt-20 w-auto'>
             <form onSubmit={handleBooking} className='p-3 rounded-md shadow-md '>
-                <div className='p-2 mb-3'>
-                    <input type="text" onChange={(e)=>{setSquadName(e.target.value)}} placeholder='Enter your Squad name' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
+                <div className='p-2 mb-3 lg:flex-col'>
+                    <label className="mr-4">Enter your name:</label>
+                    <input type="text" required onChange={(e)=>{setSquadName(e.target.value)}} placeholder='Enter your Squad name' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
                 </div>
                 <div className='p-2 mb-3'>
-                    <input type="datetime-local" onChange={(e)=>{setBookingDate(e.target.value)}} placeholder='Select Date and time' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
+                    <label className="mr-4">Pick the date:</label>
+                    <input type="date" required onChange={(e)=>{setBookDate(e.target.value)}} placeholder='Select Date and time' className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
                 </div>
                 <div className='p-2 mb-3'>
-                    <input type="text" onChange={(e)=>{setBookingDuration(e.target.value)}} placeholder="Duration of play" className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
+                    <label className="mr-4">Pick start time:</label>
+                    <input type="time" required onChange={(e)=>{setStartTime(e.target.value)}} className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
+                </div>
+                <div className='p-2 mb-3'>
+                    <label className="mr-4">Pick end time:</label>
+                    <input type="time" required onChange={(e)=>{setEndTime(e.target.value)}}  className='h-10 w-72 shadow-md placeholder:text-center lg:w-[500px] lg:rounded-md'/>
                 </div>
 
                 <div className='flex items-center justify-center'>
