@@ -30,6 +30,7 @@ router.get('/mybookings', ownerAuth, async(req,res)=>{
         res.status(500).json({ message: "Internal Server Error" });
     }
 })
+
 router.post('/new/:id', userAuth, async(req,res)=>{
     const turfId = req.params.id
     let turfNAME = await turfModel.findById(turfId).select('turfName -_id')
@@ -53,7 +54,7 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     const { squadName, bookDate, startTime, endTime } = req.body
 
     //submit booking entry
-    const query = new bookingModel({turfNAME, ownerID, bookLocation, bookerName, squadName, bookDate, startTime, endTime , bookingSerialNo})
+    const query = new bookingModel({turfId, turfNAME, ownerID, bookLocation, bookerName, squadName, bookDate, startTime, endTime , bookingSerialNo})
     query.save()
 
     const ownerAddress = await ownerModel.findById(ownerID).select('ownerEmail -_id')

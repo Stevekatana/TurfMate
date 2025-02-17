@@ -37,7 +37,7 @@ function BookingPage() {
         Axios.post('http://localhost:5000/booking/new/'+id, {squadName, bookDate, startTime, endTime}, {headers: {Authorization:`Bearer ${token}`}})
             .then(res =>{
                 console.log(res)
-                // location.reload()
+                navigate('/viewlisting/'+id)
             })
             .catch(err =>console.log(err))
     }

@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
-const Turf = require('./turfModel')
-const Owner = require('./ownerModel')
-const User = require('./userModel')
 
 const bookingSchema = new mongoose.Schema({
+    turfId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Turf"
+    },
     turfNAME:{
         type:String
     },

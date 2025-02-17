@@ -1,7 +1,9 @@
 const express = require('express')
+const mongose = require('mongoose')
 const router = express.Router()
 const turfModel = require('../Models/turfModel')
 const ownerModel = require('../Models/ownerModel')
+const bookingModel = require('../Models/bookingModel')
 const ownerAuth = require('../Middleware/ownerAuthentication')
 
 router.get('/', async(req,res)=>{
@@ -26,6 +28,17 @@ router.get('/myTurfs', ownerAuth ,async(req,res)=>{
     }
 })
 
+router.get('/bookings/:id', async(req,res)=>{
+    const idTurf = req.params.id
+    try {
+        const bookingData = await bookingModel.find({turfId: idTurf})
+        res.json(bookingData)
+    } catch (error) {
+        console.error(error)
+        res.status(400).json({ message: "Invalid Turf ID" })
+    }
+})
+
 router.post('/new', ownerAuth, async(req,res)=>{
     const turfOwner = req.owner.id
     const {turfName, turfLocation, turfPrice, turfDescription} = req.body
@@ -33,6 +46,8 @@ router.post('/new', ownerAuth, async(req,res)=>{
     query.save()
     res.json(query)
 })
+
+
 
 
 module.exports = router

@@ -12,33 +12,36 @@ function Listings() {
     const[user, setUser] = useState({})
 
     useEffect(()=>{
-        Axios.get('http://localhost:5000/turfs')
+        Axios.get('http://localhost:5000/turfs', )
             .then(res=>{
                 res = res.data
                 setListTurf(res)
             })
             .catch(err=>console.log(err))
 
-        async function fetchUserData(){
-            try{
-                const token = localStorage.getItem("token")
-                let response = await Axios.get('http://localhost:5000/users/me', { headers: {Authorization:`Bearer ${token}`} })
-                response = response.data
-                if (response) {
-                    setUser(response)
-                } else {
-                    console.error("No user data found")
-                }
-            }
-            catch(error){
-                console.error("Error fetching user data", error);
-            }
-        }
         fetchUserData()
+        //TODO: remember to return ths line of code
     },[])
     
     function backHome(){
         navigate('/')
+    }
+
+
+    async function fetchUserData(){
+        try{
+            const token = localStorage.getItem("token")
+            let response = await Axios.get('http://localhost:5000/users/me', { headers: {Authorization:`Bearer ${token}`} })
+            response = response.data
+            if (response) {
+                setUser(response)
+            } else {
+                console.error("No user data found")
+            }
+        }
+        catch(error){
+            console.error("Error fetching user data", error);
+        }
     }
 
   return (
@@ -112,6 +115,36 @@ function Listings() {
                         )
                     })
                 }
+
+                    {/* <div className=' p-2 rounded-md shadow-md mb-4' key={listTurf._id}>
+                        <div className='flex items-center justify-center'>
+                            <img src={turf} alt="image not found" className=' w-80 rounded-md'/>
+                        </div>
+                        <div className=''>
+                            <div className='flex items-center justify-center mt-3'>
+                                <span className='mr-2 font-semibold'>Title:</span>
+                                <span>777</span>
+                            </div>
+                            <div className='flex justify-around mt-2'>
+                                <div>
+                                    <span className='font-semibold'>Location:</span>
+                                    <span>Mombasa</span>
+                                </div>
+                                <div>
+                                    <span className='font-semibold'>Price:</span>
+                                    <span>1000 ksh</span>
+                                </div>
+                            </div>
+                            <div className='mt-2'>
+                                <h3 className='font-semibold text-center'>Description:</h3>
+                                <p className='mt-1 text-center'>Start by checking your network configuration (use your laptop's local IP address instead of localhost). Then, inspect for JavaScript errors, CORS issues, or touch event problems. If the issue persists, use tools like ngrok to simplify testing and debugging.</p>
+                            </div>
+                            <div className='flex items-center justify-center mt-2 p-2 bg-navBack w-auto rounded-md'>
+                                <Link className='text-awesome' to={`/viewlisting/${listTurf._id}`}>View Turf</Link>
+                            </div>
+
+                        </div>
+                    </div> */}
             </div>
         </section>
     </div>
