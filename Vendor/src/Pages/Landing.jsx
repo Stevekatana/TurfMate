@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 
 function Landing() {
   const [landingData, setLandingData] = useState({})
@@ -12,7 +14,15 @@ function Landing() {
     checkLogin()
     fetchOwnerData()
     loadBookings()
-  },[])
+
+    socket.on("connect", () => {
+      console.log(`Owner has connected to socket with id: ${socket.id}`);
+    });
+
+    return () => {
+      socket.off("connect");
+    };
+ },[])
 
   function checkLogin(){
     const token = localStorage.getItem("ownerToken")

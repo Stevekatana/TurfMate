@@ -5,6 +5,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { RiAccountCircleLine } from "react-icons/ri";
 import turf from '../assets/turf.jpg'
 import Axios from 'axios'
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 
 function Listings() {
     const navigate = useNavigate()
@@ -20,7 +22,14 @@ function Listings() {
             .catch(err=>console.log(err))
 
         fetchUserData()
-        //TODO: remember to return ths line of code
+        
+        socket.on("connect", () => {
+            console.log(`Userhas connected to socket with id: ${socket.id}`);
+        });
+    
+        return () => {
+            socket.off("connect");
+        };
     },[])
     
     function backHome(){
@@ -104,7 +113,7 @@ function Listings() {
                                     </div>
                                     <div className='mt-2'>
                                         <h3 className='font-semibold text-center'>Description:</h3>
-                                        <p className='mt-1 text-center'>{listTurf.turfDescription}</p>
+                                        <p className='mt-1 text-center lg:w-full'>{listTurf.turfDescription}</p>
                                     </div>
                                     <div className='flex items-center justify-center mt-2 p-2 bg-navBack w-auto rounded-md'>
                                         <Link className='text-awesome' to={`/viewlisting/${listTurf._id}`}>View Turf</Link>
@@ -115,36 +124,6 @@ function Listings() {
                         )
                     })
                 }
-
-                    {/* <div className=' p-2 rounded-md shadow-md mb-4' key={listTurf._id}>
-                        <div className='flex items-center justify-center'>
-                            <img src={turf} alt="image not found" className=' w-80 rounded-md'/>
-                        </div>
-                        <div className=''>
-                            <div className='flex items-center justify-center mt-3'>
-                                <span className='mr-2 font-semibold'>Title:</span>
-                                <span>777</span>
-                            </div>
-                            <div className='flex justify-around mt-2'>
-                                <div>
-                                    <span className='font-semibold'>Location:</span>
-                                    <span>Mombasa</span>
-                                </div>
-                                <div>
-                                    <span className='font-semibold'>Price:</span>
-                                    <span>1000 ksh</span>
-                                </div>
-                            </div>
-                            <div className='mt-2'>
-                                <h3 className='font-semibold text-center'>Description:</h3>
-                                <p className='mt-1 text-center'>Start by checking your network configuration (use your laptop's local IP address instead of localhost). Then, inspect for JavaScript errors, CORS issues, or touch event problems. If the issue persists, use tools like ngrok to simplify testing and debugging.</p>
-                            </div>
-                            <div className='flex items-center justify-center mt-2 p-2 bg-navBack w-auto rounded-md'>
-                                <Link className='text-awesome' to={`/viewlisting/${listTurf._id}`}>View Turf</Link>
-                            </div>
-
-                        </div>
-                    </div> */}
             </div>
         </section>
     </div>

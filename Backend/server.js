@@ -2,17 +2,20 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
+const http = require('http')
+const Server = require('socket.io')
 
-const app = express()
+let app = express()
+const server = http.createServer(app)
+const io = Server(server ,{
+    cors: {
+      origin: ['http://localhost:5173','http://localhost:5174'],
+      methods: ["GET", "POST"]
+    },
+})
 
 app.use(express.json())
-app.use(cors({origin:'*'}))
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
-});
+app.use(cors())
 dotenv.config()
 
 // TODO HANDLE CORS CORRECTLY
@@ -40,7 +43,11 @@ app.get('/', (req,res)=>{
     res.send('Server is live')
 })
 
+io.on("connection", (socket)=>{
+    console.log(`Client has connected: {${socket.id}}`)
+})
+
 const PORT = process.env.PORT
-app.listen(PORT, ()=>{
+server.listen(PORT, ()=>{
     console.log(`Server is running on port: ${PORT}`)
 })

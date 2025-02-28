@@ -21,30 +21,43 @@ function AddTurf() {
   }
 
   return (
-    <div className=' bg-gray-100 w-screen'>
-      <div className='h-full w-full p-5 '>
-        <label className="relative top-32">Select Turf Image:</label>
-        <img src={placeholder} alt="image not found" className='h-40 w-40 relative top-10 left-48'/>
-      </div>
+    <div className='w-full items-center justify-center'>
+      <div className=''>
+        <div className='flex items-center justify-center p-3 mt-10'>
+          <h1 className='text-3xl font-semibold'>Add New Turf</h1>
+        </div>
+        <div className='flex items-center justify-center mt-10 bg-gray-50 w-[800px] ml-[400px] rounded-md border-solid border-2 border-gray-200'>
+          <div className='p-3 mr-32'>
+            <h2 className='text-xl'>Upload a turf Image:</h2>
+          </div>
 
-      <form onSubmit={addTurf} className='absolute top-32 left-[800px]'>
-        <h2 className='text-2xl text-center pb-5'>Add Turf</h2>
-        <div>
-          <input type="text" placeholder='Add Turf Name' className='h-10 w-96 rounded-md' onChange={(e)=>{setTurfName(e.target.value)}}/>
+          <img src="" alt="No image found" className='w-52 h-52'/>
+          <input type="file" name="Upload image" id="" />
         </div>
-        <div>
-          <input type="text" placeholder='Add Turf Location' className='h-10 w-96 rounded-md mt-5' onChange={(e)=>{setTurfLocation(e.target.value)}}/>
+        <div className=' flex items-center justify-center mt-10 border-solid rounded-md border-gray-200 border-2 w-2/4 ml-[400px]'>
+          <form onSubmit={addTurf}>
+            <div className='p-2'>
+              <h1 className="text-xl">Turf Name:</h1>
+              <input type="text" required className="w-[600px] rounded-md h-10 bg-gray-100 placeholder:ml-5" onChange={(e)=>{setTurfName(e.target.value)}}/>
+            </div>
+            <div className='p-2 '>
+              <h1 className="text-xl">Turf Location:</h1>
+              <input type="text" required className="w-[600px] rounded-md h-10 bg-gray-100"  onChange={(e)=>{setTurfLocation(e.target.value)}}/>
+            </div>
+            <div className='p-2 '>
+              <h1 className="text-xl">Turf Price:</h1>
+              <input type="text" required className="w-[600px] rounded-md h-10 bg-gray-100"  onChange={(e)=>{setTurfPrice(e.target.value)}}/>
+            </div>
+            <div className='p-2 '>
+              <h1 className="text-xl">Turf Descrption: (not more than 500 words)</h1>
+              <textarea type="text" rows='5' required className="w-[600px] rounded-md  bg-gray-100"  onChange={(e)=>{setTurfDescription(e.target.value)}}/>
+            </div>
+            <div className='flex items-center justify-center mb-2'>
+              <input type="submit" value="Save Turf" className='bg-green-500 rounded-md p-2 w-24'/>
+            </div>
+          </form>
         </div>
-        <div>
-          <input type="text" placeholder='Add Turf Price' className='h-10 w-96 rounded-md mt-5' onChange={(e)=>{setTurfPrice(e.target.value)}}/>
-        </div>
-        <div>
-          <textarea rows='5' type="text" placeholder='Add Turf Description' className=' w-96 rounded-md mt-5 resize-none' onChange={(e)=>{setTurfDescription(e.target.value)}}/>
-        </div>
-        <div>
-          <input type="submit" value="Save"  className='h-10 w-32 bg-green-500 mt-2 text-white rounded-md'/>
-        </div>
-      </form>
+      </div>
     </div>
   )
 }

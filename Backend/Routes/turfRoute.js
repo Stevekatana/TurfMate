@@ -48,6 +48,19 @@ router.post('/new', ownerAuth, async(req,res)=>{
 })
 
 
+// TODOresearch more on this
+router.put('/update/:id', async(req,res)=>{
+    const id = req.params.id
+    const {editName, editLocation, editPrice, editDesc} = req.body
+    const query = new turfModel.findByIdAndUpdate(id)
+    query.save()
+    res.json(query)
+})
 
+router.delete('/delete/:id', async(req,res)=>{
+    const id = req.params.id
+    const delQuery = await turfModel.findOneAndDelete(id)
+    res.json(delQuery)
+})
 
 module.exports = router

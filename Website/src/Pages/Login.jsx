@@ -10,7 +10,7 @@ function Login() {
 
     async function handleLogin (e){
       e.preventDefault()
-      await Axios.post('http://192.168.100.50:5000/users/login', {username, password})
+      await Axios.post('http://localhost:5000/users/login', {username, password})
         .then(res =>{
           res = res.data
           localStorage.setItem("token", res.token)

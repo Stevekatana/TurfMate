@@ -4,11 +4,12 @@ import turf from '../assets/turf.jpg'
 import { BsFillGridFill } from "react-icons/bs";
 import { MdEdit } from "react-icons/md";
 import { ImBin2 } from "react-icons/im";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Axios from 'axios'
 
 function Myturfs() {
   const [myTurf, setMyTurf] = useState([])
+  let {id} = useParams()
 
   useEffect(()=>{
     const token = localStorage.getItem("ownerToken")
@@ -19,6 +20,15 @@ function Myturfs() {
       })
       .catch(err=>console.log(err))
   },[])
+
+  function deleteTurf(){
+    Axios.delete('http://localhost:5000/turfs/delete/'+id)
+      .then(res=>{
+        console.log('done')
+        location.reload()
+      })
+      .catch(err=>console.log(err))
+  }
 
   return (
     <div className=' p-5 bg-gray-100 w-full h-screen'>
@@ -35,12 +45,12 @@ function Myturfs() {
           </div>
         </div>
       </section>
-      <section className=' mt-3  overflow-y-scroll'>
-        <ul className='p-3 h-[600px] '>
+      <section className=' mt-3 overflow-y-scroll'>
+        <ul className='p-3 h-[800px] '>
           {
             myTurf.map((myTurf)=>{
               return(
-                <li className='flex p-5 bg-slate-200 rounded-md mb-5' key={myTurf.id}>
+                <li className='flex p-5 bg-slate-200 rounded-md mb-5' key={myTurf._id}>
                   <div>
                     <img src={turf} alt="image not found" className='w-72 h-56 rounded-md'/>
                   </div>
@@ -54,8 +64,8 @@ function Myturfs() {
                       {myTurf.turfDescription}
                     </p>
                     <div className='flex mt-16'>
-                      <Link to='/editturf:id' className='flex items-center justify-center p-2 bg-green-500 rounded-md text-white'>Edit <MdEdit className='ml-2'/></Link>
-                      <button className='flex items-center justify-center p-2 bg-red-500 rounded-md ml-3 text-white'>Delete <ImBin2 className='ml-2'/></button>
+                      <Link to={`/editturf/${myTurf._id}`} className='flex items-center justify-center p-2 bg-green-500 rounded-md text-white'>Edit <MdEdit className='ml-2'/></Link>
+                      <button onClick={deleteTurf} className='flex items-center justify-center p-2 bg-red-500 rounded-md ml-3 text-white'>Delete <ImBin2 className='ml-2'/></button>
                     </div>
                   </div>
                 </li>

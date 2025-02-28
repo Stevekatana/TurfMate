@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const app = require('../server') // Adjust the path as necessary
 const bookingModel = require('../Models/bookingModel')
 const userModel = require('../Models/userModel')
 const userAuth = require('../Middleware/userAuthentication')
@@ -8,6 +9,7 @@ const turfModel = require('../Models/turfModel')
 const { findById } = require('../Models/ownerModel')
 const transporter = require('../Middleware/mailer')
 const ownerModel = require('../Models/ownerModel')
+
 
 router.get('/', async (req,res)=>{
     try {
@@ -35,7 +37,10 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     const turfId = req.params.id
     let turfNAME = await turfModel.findById(turfId).select('turfName -_id')
     turfNAME = turfNAME.turfName
+    
     const userId = req.user.id
+    let query 
+
 
     // find userName for submission
     const user = await userModel.findById(userId).select("-__v -_id -email -phone -password")
@@ -53,19 +58,22 @@ router.post('/new/:id', userAuth, async(req,res)=>{
 
     const { squadName, bookDate, startTime, endTime } = req.body
 
-    //submit booking entry
-    const query = new bookingModel({turfId, turfNAME, ownerID, bookLocation, bookerName, squadName, bookDate, startTime, endTime , bookingSerialNo})
-    query.save()
-
+    
     const ownerAddress = await ownerModel.findById(ownerID).select('ownerEmail -_id')
     let address = ownerAddress.ownerEmail
 
     const userEmail = await userModel.findById(userId).select('email -_id')
     let userAddress = userEmail.email
 
+
+        // submit booking entry
+    query = new bookingModel({turfId, turfNAME, ownerID, bookLocation, bookerName, squadName, bookDate, startTime, endTime , bookingSerialNo})
+    query.save()
+
     const bookingEmail = {
         from: process.env.EMAIL_USER,
         to: address,
+        // to:'emmanuelkioko777@gmail.com',
         cc: userAddress,
         subject: `${bookerName} made a booking to ${turfNAME}`,
         text: `${bookerName} made a booking to ${turfNAME} for ${bookDate} starting from ${startTime} until ${endTime}. Below is a copy of your ticket which will be used to confirm your booking. Game on!!`,
@@ -73,8 +81,10 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     }
     console.log(bookingEmail)
     // await transporter.sendMail(bookingEmail)
-
+    
     res.json(query)
+
+    
 })
 
 router.delete('/del', async(req,res)=>{

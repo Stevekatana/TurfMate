@@ -27,56 +27,34 @@ function Bookings() {
             <div className='text-center p-3 mt-3'>
                 <h1 className='font-semibold text-4xl'>My Bookings</h1>
             </div>
-            <div className='h-[800px] flex justify-center pt-5 overflow-y-scroll'>
-                <ul className=''>
-                    {
-                        bookingData.map((bookingData)=>{
-                            return(
-                                <li className='bg-slate-400 p-3 w-[700px] rounded-md mb-4' >
-                                    <Link to='/viewboking' key={bookingData.id}>
-                                        <div className='text-center p-1'> 
-                                            <span className='font-semibold uppercase text-2xl'>{bookingData.bookerName}</span>
-                                            <span className='ml-1 text-2xl'>made a booking at:</span>
-                                            <span className='ml-2 font-semibold uppercase text-2xl'>{bookingData.turfNAME}</span>
-                                        </div>
-                                        <div className=' flex items-center justify-around mt-5'>
-                                            <div>
-                                                <span className='text-xl font-semibold'>Squad name:</span>
-                                                <span className='ml-2 text-xl'>{bookingData.squadName}</span>
-                                            </div>
-                                            <div>
-                                                <span className='text-xl font-semibold'>Duration:</span>
-                                                <span className='ml-2 text-xl'>{bookingData.bookingDuration} hr(s)</span>
-                                            </div>
-                                        </div>
-                                        <div className=' flex items-center justify-around mt-5'>
-                                            <div>
-                                                <span className='text-xl font-semibold'>Date:</span>
-                                                <span className='ml-2 text-xl'>{bookingData.bookDate}</span>
-                                            </div>
-                                            <div>
-                                                <span className='text-xl font-semibold'>Time:</span>
-                                                <span className='ml-2 text-xl'>{bookingData.bookTime} </span>
-                                            </div>
-                                        </div>
-                                        <div className=' mt-5 flex items-center justify-center'>
-                                            <div>
-                                                <div>
-                                                    <span className='text-xl font-semibold'>Location:</span>
-                                                    <span className='ml-2 text-xl'>{bookingData.bookLocation}</span>
-                                                </div>
-                                                <div className='mt-2'>
-                                                    <span className='font-semibold text-gray-500 text-lg'>Serial number:</span>
-                                                    <span className='ml-2 text-lg text-gray-500'>{bookingData.bookingSerialNo}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+            {/* sorting section */}
+            
+
+            <div className='h-[700px] w-full p-5 overflow-y-scroll'>
+                <table className='w-full'>
+                    <thead className='bg-gray-500'>
+                        <th className='p-5 h-7'>Date</th>
+                        <th className='p-5 h-7'>Client</th>
+                        <th className='p-5 h-7'>Squad Name</th>
+                        <th className='p-5 h-7'>Start Time</th>
+                        <th className='p-5 h-7'>End Time</th>
+                    </thead>
+                    <tbody>
+                        {
+                            bookingData.map((bookingData)=>{
+                                return(
+                                    <tr key={bookingData._id} className='text-center lg: lg:h-12 border-b-2 border-b-black border-b-solid mt-2 mb-2'>
+                                        <td>{bookingData.bookDate}</td>
+                                        <td>{bookingData.bookerName}</td>
+                                        <td>{bookingData.squadName}</td>
+                                        <td>{bookingData.startTime}</td>
+                                        <td>{bookingData.endTime}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 

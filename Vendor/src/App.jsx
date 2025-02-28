@@ -24,7 +24,7 @@ function App() {
         <Route path="/myTurf" element={<MyTurf />} />
         <Route path="/bookings" element={<Bookings />}/>
         {/* <Route path='/viewbooking' element={<ViewBooking />}/> */}
-        <Route path="/editturf:_id" element={<EditTurf />}/>
+        <Route path="/editturf/:id" element={<EditTurf />}/>
       </Routes>
     </div>
   )

@@ -4,13 +4,19 @@ import { Link,useNavigate, useParams } from 'react-router-dom';
 import turf from '../assets/turf.jpg'
 import { useEffect } from 'react';
 import  Axios  from 'axios';
-
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 
 
 function ViewListing() {
   const navigate = useNavigate()
   const [data, setData] = useState([])
   const [turfBookings, setTurfBookings] = useState([])
+  const [date, setDate] = useState('')
+  const [day, setDay] = useState('')
+  const [click, setClick] = useState(false)
   const {id} = useParams()
 
   useEffect(()=>{
@@ -20,12 +26,17 @@ function ViewListing() {
         setData(res)
       })
       .catch(err => console.log(err))
+
+      socket.on('newBooking', (info)=>{
+        console.log(info)
+      })
       
       fetchTurfbookings()
+      renderDate()
   },[])
 
   async function fetchTurfbookings(){
-    Axios.get('http://localhost:5000/turfs/bookings/'+id)
+    await Axios.get('http://localhost:5000/turfs/bookings/'+id)
     .then(res =>{
       res = res.data
       setTurfBookings(res)
@@ -36,6 +47,23 @@ function ViewListing() {
   function backHome(){
       navigate('/listing')
   }
+
+  function renderDate(){
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const date = new Date().toLocaleDateString();
+    let day = weekday[new Date().getDay()];
+
+    console.log(day, date)
+
+    setDate(date)
+    setDay(day)
+  }
+
+  function liked(){
+    return
+  }
+
+
   return (
     <div className='lg:h-full '>
       <section className='lg:border-b-gray-300 lg:border-b-2' > 
@@ -47,6 +75,11 @@ function ViewListing() {
             <div className='absolute top-[300px] lg:top-[180px] lg:left-[600px] lg:text-5xl'>
               <h1 className='text-3xl text-center font-semibold uppercase'>{data.turfName}</h1>
             </div>
+        </div>
+        <div className='flex items-center justify-center mt-3 mb-2 w-auto p-2 '>
+          <Link to={`/booking/${data._id}`} className='bg-navBack text-center h-10 text-awesome p-2 rounded-md w-60'>Book Turf</Link>
+          <FaHeart />
+          <FaRegHeart />
         </div>
       </section>
 
@@ -61,9 +94,9 @@ function ViewListing() {
 
           <div className='bg-white lg:ml-4 p-3 lg:rounded-md lg:h-full'>
             <div className='flex items-center justify-center'>
-              <h1 className='text-2xl lg:mt-3 font-semibold underline'>Bookings made: Monday [17/2/2025]</h1>
+              <h1 className='text-2xl lg:mt-3 font-semibold underline'>Bookings made: {day} - {date}</h1>
             </div>
-            <table className='lg:w-[500px] p-10 lg:mt-2 rounded-md'>
+            <table className='lg:w-[500px] p-10 lg:mt-2 rounded-md overflow-y-scroll'>
               <thead className=''>
                 <th className='border-black border-2 border-solid'>Date</th>
                 <th className='border-black border-2 border-solid'>Squad Name</th>
@@ -100,10 +133,6 @@ function ViewListing() {
           </div>
         </div>
       </section>
-
-      <div className='flex items-center justify-center mt-3 mb-2'>
-        <Link to={`/booking/${data._id}`} className='bg-navBack text-center h-10 text-awesome p-2 rounded-md w-60'>Book Turf</Link>
-      </div>
     </div>
   )
 }
