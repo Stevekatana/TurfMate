@@ -15,14 +15,14 @@ app.use((req,res,next)=>{
     next()
 })
 
-// app.set('sockets', io)
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: ['http://localhost:5173','http://localhost:5174']
+}))
 dotenv.config()
 
 // TODO HANDLE CORS CORRECTLY
 // TODO ENTER WEBSOCKETS
-
 // routes import
 const Users = require('./Routes/clientRoute')
 const Owner = require('./Routes/ownerRoute')
@@ -35,7 +35,6 @@ app.use('/owner', Owner)
 app.use('/users', Users)
 app.use('/turfs', Turfs)
 
-
 mongoose.connect(process.env.MONGO_URI)
     .then(console.log('Server-Db connection established:(^j^):'))
     .catch(err => {
@@ -45,7 +44,6 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/', (req,res)=>{
     res.send('Server is live')
 })
-
 
 const PORT = process.env.PORT
 server.listen(PORT, ()=>{

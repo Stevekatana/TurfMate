@@ -14,7 +14,7 @@ function Myturfs() {
 
   useEffect(()=>{
     const token = localStorage.getItem("ownerToken")
-    Axios.get('http://localhost:5000/turfs/myTurfs', { headers:{Authorization: `Bearer ${token}`}})
+    Axios.get('http://localhost:5000/turfs/myTurfs', {headers:{Authorization: `Bearer ${token}`}})
       .then(res=>{
         res = res.data
         setMyTurf(res)

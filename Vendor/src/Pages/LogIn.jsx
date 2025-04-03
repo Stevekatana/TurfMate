@@ -14,7 +14,7 @@ function LogIn() {
     await Axios.post('http://localhost:5000/owner/login', {ownerEmail, ownerPassword})
       .then(res =>{
         res = res.data
-        localStorage.setItem("ownerToken", res.token)
+        localStorage.setItem("ownerToken",res.token)
         navigate('/')
       })
       .catch(err =>{

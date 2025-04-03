@@ -33,11 +33,13 @@ function Bookings() {
             <div className='h-[700px] w-full overflow-y-scroll'>
                 <table className='w-full'>
                     <thead className='bg-gray-500 sticky top-0'>
-                        <th className='p-5 h-7'>Date</th>
-                        <th className='p-5 h-7'>Client</th>
-                        <th className='p-5 h-7'>Squad Name</th>
-                        <th className='p-5 h-7'>Start Time</th>
-                        <th className='p-5 h-7'>End Time</th>
+                        <tr>
+                            <th className='p-5 h-7'>Date</th>
+                            <th className='p-5 h-7'>Client</th>
+                            <th className='p-5 h-7'>Squad Name</th>
+                            <th className='p-5 h-7'>Start Time</th>
+                            <th className='p-5 h-7'>End Time</th>
+                        </tr>
                     </thead>
                     <tbody className='mt-5'>
                         {

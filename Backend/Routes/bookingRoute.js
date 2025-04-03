@@ -76,10 +76,7 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     }
     // transporter.sendMail(bookingEmail)
 
-    req.io.emit('admin-notif', ()=>{
-        console.log(bookingEmail)
-    })
-    
+    req.io.to('room1').emit('admin-notif')
     res.json(query)
 })
 

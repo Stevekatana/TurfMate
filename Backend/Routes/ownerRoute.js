@@ -45,5 +45,11 @@ router.get('/profile', ownerAuth, async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
+router.get('/socketid', ownerAuth, async(req,res)=>{
+    const id = req.owner.id
+    const data = await ownerModel.findById(id).select("_id");
+    if (!data) return res.status(404).json({ message: "Owner Not Found!!" });
+    res.json(data);
+})
 
 module.exports = router

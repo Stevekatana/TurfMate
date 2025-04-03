@@ -1,4 +1,5 @@
 const { Server } = require("socket.io");
+const ownerAuth = require('../Middleware/ownerAuthentication')
 
 let io;
 
@@ -14,8 +15,9 @@ const initializeSocket = (server) => {
         console.log(`User connected: ${socket.id}`);
 
         // Turf owner joins a specific room
-        socket.on('ownerRoom', (room)=>{
-            
+        socket.on("owner-room", (room)=>{
+            socket.join(room)
+            console.log(`owner ${socket.id} joined ${room}`)
         })
 
         // Handle disconnect

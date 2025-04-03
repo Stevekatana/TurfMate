@@ -9,23 +9,35 @@ import MyTurf from './Pages/MyTurfs'
 import EditTurf from './Pages/EditTurf'
 import Sidebar from './Components/Sidebar'
 import Bookings from './Pages/Bookings'
-import ViewBooking from './Pages/ViewBooking'
 import Messages from './Pages/Messages'
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import io from 'socket.io-client'
 const socket = io('http://localhost:5000')
+import Axios from 'axios'
 
 function App() {
   let notif = 'A new Booking has been made. Refresh page.'
-
+  
   useEffect(()=>{
     socket.on("connection", () => {
-      console.log(`Owner has connected to socket with id: ${socket.id}::::`);
+      console.log(`Owner has connected to socket with id: ${socket.id}`);
     });
 
-    socket.on('admin-notif', () =>{
-      toast(notif)
+    let oID
+    const token = localStorage.getItem("ownerToken")
+    Axios.get('http://localhost:5000/owner/socketid', {headers: {Authorization: `Bearer ${token}`}})
+      .then(res =>{
+        res = res.data._id
+        console.log(res)
+        oID = res
+        console.log(`This, ${oID}`)
+      })
+      .catch(err => console.log(err))
+
+      socket.emit('owner-room', `${oID}`)
+      socket.on('admin-notif', () =>{
+      toast(oID)
     }) 
 
     return () => {
@@ -45,7 +57,6 @@ function App() {
         <Route path="/addTurf" element={<AddTurf />} />
         <Route path="/myTurf" element={<MyTurf />} />
         <Route path="/bookings" element={<Bookings />}/>
-        {/* <Route path='/viewbooking' element={<ViewBooking />}/> */}
         <Route path="/editturf/:id" element={<EditTurf />}/>
         <Route path='/messages' element={<Messages />}/>
       </Routes>
