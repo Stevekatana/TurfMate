@@ -59,11 +59,6 @@ function ViewListing() {
     setDay(day)
   }
 
-  function liked(){
-    return
-  }
-
-
   return (
     <div className='lg:h-full '>
       <section className='lg:border-b-gray-300 lg:border-b-2' > 
@@ -78,8 +73,8 @@ function ViewListing() {
         </div>
         <div className='flex items-center justify-center mt-3 mb-2 w-auto p-2 '>
           <Link to={`/booking/${data._id}`} className='bg-navBack text-center h-10 text-awesome p-2 rounded-md w-60'>Book Turf</Link>
-          <FaHeart />
-          <FaRegHeart />
+          {/* <FaHeart className='text-3xl ml-5'/> */}
+          <FaRegHeart className='text-3xl ml-5'/>
         </div>
       </section>
 
@@ -96,7 +91,7 @@ function ViewListing() {
             <div className='flex items-center justify-center'>
               <h1 className='text-2xl lg:mt-3 font-semibold underline'>Bookings made: {day} - {date}</h1>
             </div>
-            <table className='lg:w-[500px] p-10 lg:mt-2 rounded-md overflow-y-scroll'>
+            <table className='lg:w-[500px] p-10 lg:mt-2 rounded-md overflow-y-scroll lg:h-10'>
               <thead className=''>
                 <th className='border-black border-2 border-solid'>Date</th>
                 <th className='border-black border-2 border-solid'>Squad Name</th>
@@ -107,7 +102,7 @@ function ViewListing() {
                 {
                   turfBookings.map((turfBookings)=>{
                     return(
-                      <tr className='text-center p-20 lg:h-10 bg-slate-500' key={turfBookings._id}>
+                      <tr className='text-center p-20  bg-slate-500' key={turfBookings._id}>
                         <td>{turfBookings.bookDate}</td>
                         <td>{turfBookings.squadName}</td>
                         <td>{turfBookings.startTime}</td>
@@ -116,7 +111,6 @@ function ViewListing() {
                     )
                   })
                 }
-
               </tbody>
             </table>
           </div>

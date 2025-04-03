@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Landing from './Pages/Landing'
 import SignUp from './Pages/SignUp'
@@ -10,11 +10,33 @@ import EditTurf from './Pages/EditTurf'
 import Sidebar from './Components/Sidebar'
 import Bookings from './Pages/Bookings'
 import ViewBooking from './Pages/ViewBooking'
+import Messages from './Pages/Messages'
+import { ToastContainer, toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 
 function App() {
+  let notif = 'A new Booking has been made. Refresh page.'
+
+  useEffect(()=>{
+    socket.on("connection", () => {
+      console.log(`Owner has connected to socket with id: ${socket.id}::::`);
+    });
+
+    socket.on('admin-notif', () =>{
+      toast(notif)
+    }) 
+
+    return () => {
+      socket.off("admin-notif");
+    };
+  },[])
+  
   return (
     <div className='flex'>
       <Sidebar />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<SignUp />} />
@@ -25,6 +47,7 @@ function App() {
         <Route path="/bookings" element={<Bookings />}/>
         {/* <Route path='/viewbooking' element={<ViewBooking />}/> */}
         <Route path="/editturf/:id" element={<EditTurf />}/>
+        <Route path='/messages' element={<Messages />}/>
       </Routes>
     </div>
   )

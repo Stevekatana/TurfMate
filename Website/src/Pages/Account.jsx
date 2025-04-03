@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { IoArrowBack } from "react-icons/io5";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import turf from '../assets/turf.jpg'
 import { FaHeart } from "react-icons/fa";
 import { IoIosExit } from "react-icons/io";
@@ -64,7 +64,7 @@ function Account() {
                     <p className='text-white flex items-center justify-center '>Messages <FaMessage  className='text-awesome ml-2'/></p>
                 </div>
                 <div className='w-full bg-navBack p-2 rounded-md mb-2'>
-                    <p className='text-white flex items-center justify-center '>Your Favourites <FaHeart className='text-awesome ml-2'/></p>
+                    <Link to='/favourites' className='text-white flex items-center justify-center '>Your Favourites <FaHeart className='text-awesome ml-2'/></Link>
                 </div>
                 <div className='w-full bg-navBack p-2 rounded-md mb-2'>
                     <p className='text-white flex items-center justify-center '>Settings <FaCog className='text-awesome ml-2'/></p>
@@ -73,7 +73,6 @@ function Account() {
                     <button className='text-white flex items-center justify-center text-center' onClick={handleLogOut}>Log Out <IoIosExit className='text-red-500 ml-2 text-2xl'/></button>
                 </div>
             </div>
-            
         </div>
     </div>
   )}

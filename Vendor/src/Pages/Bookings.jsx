@@ -30,16 +30,16 @@ function Bookings() {
             {/* sorting section */}
             
 
-            <div className='h-[700px] w-full p-5 overflow-y-scroll'>
+            <div className='h-[700px] w-full overflow-y-scroll'>
                 <table className='w-full'>
-                    <thead className='bg-gray-500'>
+                    <thead className='bg-gray-500 sticky top-0'>
                         <th className='p-5 h-7'>Date</th>
                         <th className='p-5 h-7'>Client</th>
                         <th className='p-5 h-7'>Squad Name</th>
                         <th className='p-5 h-7'>Start Time</th>
                         <th className='p-5 h-7'>End Time</th>
                     </thead>
-                    <tbody>
+                    <tbody className='mt-5'>
                         {
                             bookingData.map((bookingData)=>{
                                 return(

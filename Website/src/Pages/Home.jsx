@@ -6,6 +6,7 @@ import { FaApple } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import Card from '../Components/Card';
 
 function Home() {
   const [active, setActive] = useState(false)
@@ -46,11 +47,11 @@ function Home() {
           </div>
           <div className='lg:ml-burger'>
             <GiHamburgerMenu onClick={handleDrop} className='text-white text-4xl absolute left-80 top-8 lg:hidden'/>
-            <ul id='dropDown' className='bg-navBack hidden mt-topper w-full absolute -ml-crisp lg:flex lg:gap-10 lg:-ml-5 lg:mt-10 lg:bg-transparent'>
-              <li onClick={scrollHome} className='p-2 text-center text-awesome text-xl lg:text-white hover:cursor-pointer'>Home</li>
-              <li onClick={scrollAbout} className='p-2 text-center text-awesome text-xl lg:text-white hover:cursor-pointer'>Why Us</li>
-              <li onClick={openSignin} className='p-2 text-center text-awesome text-xl lg:text-white hover:cursor-pointer'>Sign in</li>
-              {/* <li className='p-2 text-center text-awesome text-xl lg:text-white'>Contact Us</li> */}
+            <ul id='dropDown' className='bg-navBack hidden mt-topper w-full absolute -ml-crisp lg:flex lg:gap-10 lg:ml-20 lg:mt-10 lg:bg-transparent'>
+              <li onClick={scrollHome} className='p-2 text-center text-awesome text-xl lg:text-white hover:text-awesome hover:cursor-pointer'>Home</li>
+              <li onClick={scrollAbout} className='p-2 text-center text-awesome text-xl lg:text-white hover:text-awesome hover:cursor-pointer'>Why Us</li>
+              <li onClick={openSignin} className='p-2 text-center text-awesome text-xl lg:text-white hover:text-awesome hover:cursor-pointer'>Sign in</li>
+              <li className='p-2 text-center text-awesome text-xl lg:text-white hover:text-awesome'>Contact Us</li>
             </ul>
           </div>
         </div>
@@ -66,7 +67,7 @@ function Home() {
       </section>
 
       {/* About us */}
-      <section  ref={aboutRef} className='p-7'>
+      <section  ref={aboutRef} className='p-7 border-b-2'>
         <div className='flex items-center justify-center p-3'>
           <h1 className='text-3xl italic font-semibold'>Why Us</h1>
         </div>
@@ -79,7 +80,35 @@ function Home() {
         </div>
       </section>
 
-
+      {/* show some listings */}
+      <section className='mt-5'>
+        <div className='flex items-center justify-center p-3'>
+          <h1 className='text-3xl italic font-semibold'>Listed Turfs</h1>
+        </div>
+        <div className='grid grid-cols-3 gap-10 p-10 mt-5'>
+          <Card 
+            turfname='777 recreational center'
+            turfprice='4000'
+            turflocation='Syokimau'
+            turfdescription='A place where grass is green and where stars are made, welcome to sweatervest camp where you can make your dreams come true'
+            route='/listing'
+          />
+          <Card 
+            turfname='777 recreational center'
+            turfprice='4000'
+            turflocation='Syokimau'
+            turfdescription='A place where grass is green and where stars are made, welcome to sweatervest camp where you can make your dreams come true'
+            route='/listing'
+          />
+          <Card 
+            turfname='777 recreational center'
+            turfprice='4000'
+            turflocation='Syokimau'
+            turfdescription='A place where grass is green and where stars are made, welcome to sweatervest camp where you can make your dreams come true'
+            route='/listing'
+          />
+        </div>
+      </section>
 
       {/* footer */}
       <section className='bg-navBack'>

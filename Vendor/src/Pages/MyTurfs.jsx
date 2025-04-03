@@ -6,6 +6,7 @@ import { MdEdit } from "react-icons/md";
 import { ImBin2 } from "react-icons/im";
 import { Link, useParams } from 'react-router-dom';
 import Axios from 'axios'
+import Card from '../Components/Card';
 
 function Myturfs() {
   const [myTurf, setMyTurf] = useState([])
@@ -36,7 +37,7 @@ function Myturfs() {
         <div className='flex items-center justify-center'>
           <h1 className='text-2xl font-semibold ml-10'>My Turfs</h1>
         </div>
-        <div className='flex '>
+        <div className='flex'>
           <div className='p-2'>
           <FaList className='text-2xl'/>
           </div>
@@ -46,33 +47,22 @@ function Myturfs() {
         </div>
       </section>
       <section className=' mt-3 overflow-y-scroll'>
-        <ul className='p-3 h-[800px] '>
+        <div className='h-auto p-3 lg:grid lg:grid-cols-2 lg:gap-10 lg:p-12' >
           {
             myTurf.map((myTurf)=>{
               return(
-                <li className='flex p-5 bg-slate-200 rounded-md mb-5' key={myTurf._id}>
-                  <div>
-                    <img src={turf} alt="image not found" className='w-72 h-56 rounded-md'/>
-                  </div>
-                  <div className='ml-10'>
-                    <div>
-                      <h1 className='text-3xl font-semibold'>{myTurf.turfName}</h1>
-                      <h1>Location: {myTurf.turfLocation}</h1>
-                      <h1>Price: {myTurf.turfPrice}</h1>
-                    </div>
-                    <p className='mt-3'>
-                      {myTurf.turfDescription}
-                    </p>
-                    <div className='flex mt-16'>
-                      <Link to={`/editturf/${myTurf._id}`} className='flex items-center justify-center p-2 bg-green-500 rounded-md text-white'>Edit <MdEdit className='ml-2'/></Link>
-                      <button onClick={deleteTurf} className='flex items-center justify-center p-2 bg-red-500 rounded-md ml-3 text-white'>Delete <ImBin2 className='ml-2'/></button>
-                    </div>
-                  </div>
-                </li>
+                <Card 
+                  name={myTurf.turfName}
+                  location={myTurf.turfLocation}
+                  price={myTurf.turfPrice}
+                  description={myTurf.turfDescription}
+                  route={`/editturf/${myTurf._id}`}
+                  handledelete={deleteTurf}
+                />
               )
             })
           }
-        </ul>
+        </div>
       </section>
     </div>
   )

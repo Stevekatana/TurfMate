@@ -9,6 +9,7 @@ import { CiLogout } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
 import Turf from '../assets/turf.jpg'
 import { useEffect, useState } from 'react';
+import { IoIosNotifications } from "react-icons/io";
 import Axios from 'axios'
 
 function Sidebar() {
@@ -50,7 +51,7 @@ function Sidebar() {
             <img src={Turf} alt="image not found"  className='w-60 h-60 rounded-[999px]'/>
           </div>
           <div className='flex items-center justify-center mt-5'>
-            <h1 className='text-2xl'>{sidebarData.ownerFirstName} {sidebarData.ownerLastName}</h1>
+            <h1 className='text-2xl capitalize'>{sidebarData.ownerFirstName} {sidebarData.ownerLastName}</h1>
           </div>
         </div>
 
@@ -68,6 +69,12 @@ function Sidebar() {
                     My Bookings
                   </Link>
               </li>
+              {/* <li>
+                  <Link to='/messages' className='text-xl flex items-center justify-start mb-3 hover:underline'>
+                    <IoIosNotifications  className='mr-2 text-xl'/>
+                    My Messages
+                  </Link>
+              </li> */}
               <li>
                   <Link to='/myTurf' className='text-xl flex items-center justify-start mb-3 hover:underline'>
                     <TbSoccerField className='mr-2 text-xl'/>

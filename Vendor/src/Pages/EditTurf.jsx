@@ -5,13 +5,10 @@ import Axios  from 'axios'
 
 function EditTurf() {
   const [edit, setEdit] = useState([])
-
   const [editName, setEditName] = useState('')
   const [editLocation, setLocation] = useState('')
   const [editPrice, setPrice] = useState('')
-  const [editDesc, setDesc] = useState('')
-
-  
+  const [editDesc, setDesc] = useState('')  
   let {id}= useParams()
 
   useState(()=>{
@@ -25,17 +22,18 @@ function EditTurf() {
   },[])
 
   function handleEdit(){
-    Axios.put('http://localhost:5000/turfs/update'+id,{editName, editLocation, editPrice, editDesc})
+    Axios.put('http://localhost:5000/turfs/update/'+id, {editName, editLocation, editPrice, editDesc})
       .then(res =>{
         console.log(res)
       })
       .catch(err => console.log(err))
   }
+
   return (
     <div className='w-full items-center justify-center'>
       <div className=''>
         <div className='flex items-center justify-center p-3 mt-10'>
-          <h1 className='text-3xl font-semibold'>Add New Turf</h1>
+          <h1 className='text-3xl font-semibold'>Edit: {edit.turfName}</h1>
         </div>
         <div className='flex items-center justify-center mt-10 bg-gray-50 w-[800px] ml-[400px] rounded-md border-solid border-2 border-gray-200'>
           <div className='p-3 mr-32'>

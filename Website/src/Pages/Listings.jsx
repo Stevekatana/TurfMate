@@ -6,6 +6,7 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import turf from '../assets/turf.jpg'
 import Axios from 'axios'
 import io from 'socket.io-client'
+import Card from '../Components/Card';
 const socket = io('http://localhost:5000')
 
 function Listings() {
@@ -77,7 +78,7 @@ function Listings() {
             <div className='flex items-center justify-center p-2 '>
                 <form action="">
                     <input type="text" placeholder="Search here..." className='h-10 w-72 mr-5 lg:rounded-md'/>
-                    <input type="submit" value="Search" className='bg-navBack text-awesome p-1 rounded-md'/>
+                    <input type="submit" value="Search" className='bg-navBack text-awesome p-2 rounded-md'/>
                 </form>
             </div>
             <div className='flex items-center justify-center p-2 mt-2'>
@@ -86,41 +87,18 @@ function Listings() {
         </section>
         <section>
             {/* grid container */}
-            <div className='p-3 overflow-y-scroll lg:grid lg:grid-cols-3 lg:gap-5 lg:p-12'>
+            <div className='h-auto p-3 overflow-y-scroll lg:grid lg:grid-cols-3 lg:gap-10 lg:p-12'>
                 {/* Grid component */}
-
                 {
                     listTurf.map((listTurf)=>{
                         return(
-                            <div className=' p-2 rounded-md shadow-md mb-4' key={listTurf._id}>
-                                <div className='flex items-center justify-center'>
-                                    <img src={turf} alt="image not found" className=' w-80 rounded-md'/>
-                                </div>
-                                <div className=''>
-                                    <div className='flex items-center justify-center mt-3'>
-                                        <span className='mr-2 font-semibold'>Title:</span>
-                                        <span>{listTurf.turfName}</span>
-                                    </div>
-                                    <div className='flex justify-around mt-2'>
-                                        <div>
-                                            <span className='font-semibold'>Location:</span>
-                                            <span>{listTurf.turfLocation}</span>
-                                        </div>
-                                        <div>
-                                            <span className='font-semibold'>Price:</span>
-                                            <span>{listTurf.turfPrice} ksh</span>
-                                        </div>
-                                    </div>
-                                    <div className='mt-2'>
-                                        <h3 className='font-semibold text-center'>Description:</h3>
-                                        <p className='mt-1 text-center lg:w-full'>{listTurf.turfDescription}</p>
-                                    </div>
-                                    <div className='flex items-center justify-center mt-2 p-2 bg-navBack w-auto rounded-md'>
-                                        <Link className='text-awesome' to={`/viewlisting/${listTurf._id}`}>View Turf</Link>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <Card 
+                                turfname={listTurf.turfName}
+                                turfprice={listTurf.turfPrice}
+                                turflocation={listTurf.turfLocation}
+                                turfdescription={listTurf.turfDescription}
+                                route={`/viewlisting/${listTurf._id}`}
+                            />
                         )
                     })
                 }

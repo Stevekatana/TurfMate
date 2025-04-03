@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { IoArrowBack } from 'react-icons/io5'
 import { useNavigate, useParams } from 'react-router-dom'
 import Axios from 'axios'
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 
 function BookingPage() {
     const navigate = useNavigate()
@@ -32,7 +34,7 @@ function BookingPage() {
         Axios.post('http://localhost:5000/booking/new/'+id, {squadName, bookDate, startTime, endTime}, {headers: {Authorization:`Bearer ${token}`}})
             .then(res =>{
                 console.log(res)
-                navigate('/viewlisting/'+id)
+                // navigate('/viewlisting/'+id)
             })
             .catch(err =>console.log(err))
     }

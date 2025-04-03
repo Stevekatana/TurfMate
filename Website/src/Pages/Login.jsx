@@ -49,7 +49,7 @@ function Login() {
                     <input type="submit" value="Log In" className='bg-navBack text-awesome p-2 lg:rounded-md'/>
 
                     {/* TODO:REMEMBER TO FIX THIS LINE AFTER ADDING SCHEDULING TABLE */}
-                    <Link to='/listings' className='text-xs italic'>Don't have an Account? Sign Up</Link>
+                    <Link to='/' className='text-xs italic'>Don't have an Account? Sign Up</Link>
                 </div>
             </form>
         </div>

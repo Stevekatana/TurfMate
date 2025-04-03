@@ -7,6 +7,7 @@ import Listings from './Pages/Listings'
 import ViewListing from './Pages/ViewListing'
 import BookingPage from './Pages/BookingPage'
 import Account from './Pages/Account'
+import Favourites from './Pages/Favourites'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/viewlisting/:id' element={<ViewListing />}/>
         <Route path='/booking/:id' element={<BookingPage />}/>
         <Route path='/acc' element={<Account />}/>
+        <Route path='/favourites' element={<Favourites />}/>
       </Routes>
     </div>
   )
