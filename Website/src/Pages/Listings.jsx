@@ -25,7 +25,7 @@ function Listings() {
         fetchUserData()
         
         socket.on("connect", () => {
-            console.log(`Userhas connected to socket with id: ${socket.id}`);
+            console.log(`User has connected to socket with id: ${socket.id}`);
         });
     
         return () => {
@@ -35,6 +35,16 @@ function Listings() {
     
     function backHome(){
         navigate('/')
+    }
+
+    function emitJoinRoom(){
+        Axios.get('http://localhost:5000/turfs', )
+            .then(res=>{
+                res = res.data
+                setListTurf(res)
+            })
+            .catch(err=>console.log(err))
+        socket.emit('ownerConnect', string(res.turfOwner))
     }
 
 
@@ -98,6 +108,7 @@ function Listings() {
                                 turflocation={listTurf.turfLocation}
                                 turfdescription={listTurf.turfDescription}
                                 route={`/viewlisting/${listTurf._id}`}
+                                joinRoom={emitJoinRoom}
                             />
                         )
                     })

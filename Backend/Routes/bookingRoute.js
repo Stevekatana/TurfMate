@@ -46,8 +46,8 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     
     const owner = await turfModel.findById(turfId)
     const ownerID = owner.turfOwner
+    console.log(ownerID.toString())
     
-
     const bookingSerialNo = BigInt(Math.floor(Math.random() * 9e16) + 1e16).toString();
     
     let bookLocation = await turfModel.findById(turfId).select('turfLocation -_id')
@@ -65,7 +65,6 @@ router.post('/new/:id', userAuth, async(req,res)=>{
     query = new bookingModel({turfId, turfNAME, ownerID, bookLocation, bookerName, squadName, bookDate, startTime, endTime , bookingSerialNo})
     query.save()
     
-
     const bookingEmail = {
         from: process.env.EMAIL_USER,
         to: address,
@@ -75,8 +74,8 @@ router.post('/new/:id', userAuth, async(req,res)=>{
         // html:``
     }
     // transporter.sendMail(bookingEmail)
-
-    req.io.to('room1').emit('admin-notif')
+    
+    req.io.to(ownerID).emit('admin-notif', bookingEmail)
     res.json(query)
 })
 

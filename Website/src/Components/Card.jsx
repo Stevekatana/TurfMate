@@ -28,7 +28,7 @@ function Card(props) {
                 <p className='mt-1 text-center lg:w-full'>{props.turfdescription}</p>
             </div>
             <div className='flex items-center justify-center mt-2 p-2 bg-navBack w-auto rounded-md'>
-                <Link className='text-awesome' to={props.route} >View Turf</Link>
+                <Link className='text-awesome' to={props.route} onClick={props.joinRoom}>View Turf</Link>
             </div>
         </div>
     </div>

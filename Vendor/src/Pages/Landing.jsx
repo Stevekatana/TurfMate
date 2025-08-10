@@ -13,8 +13,6 @@ function Landing() {
 
   const token = localStorage.getItem('ownerToken')
   
-
-
   useEffect(()=>{
     // console.log(token)
     checkLogin()
@@ -38,6 +36,8 @@ function Landing() {
       response = response.data
       if (response) {
         setLandingData(response)
+        socket.emit('connectOwner', String(response._id))
+        console.log(response)
       } else {
         console.error("No data found in response")
       }

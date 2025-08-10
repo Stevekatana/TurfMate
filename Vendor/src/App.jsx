@@ -28,16 +28,15 @@ function App() {
     const token = localStorage.getItem("ownerToken")
     Axios.get('http://localhost:5000/owner/socketid', {headers: {Authorization: `Bearer ${token}`}})
       .then(res =>{
-        res = res.data._id
-        console.log(res)
-        oID = res
+        oID = res.data._id
         console.log(`This, ${oID}`)
+        socket.oid = oID
+        socket.emit('owner-room', socket.oid)
       })
       .catch(err => console.log(err))
 
-      socket.emit('owner-room', `${oID}`)
       socket.on('admin-notif', () =>{
-      toast(oID)
+      toast(notif)
     }) 
 
     return () => {

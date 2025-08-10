@@ -1,6 +1,4 @@
 const { Server } = require("socket.io");
-const ownerAuth = require('../Middleware/ownerAuthentication')
-
 let io;
 
 const initializeSocket = (server) => {
@@ -12,14 +10,24 @@ const initializeSocket = (server) => {
     });
 
     io.on("connection", (socket) => {
+        
         console.log(`User connected: ${socket.id}`);
 
-        // Turf owner joins a specific room
-        socket.on("owner-room", (room)=>{
-            socket.join(room)
-            console.log(`owner ${socket.id} joined ${room}`)
-        })
+        // socket.on("ownerConnect", (ownerId) => {
+        //     if (!ownerId) {
+        //         console.warn(`ownerConnect event received without a valid ownerId from socket: ${socket.id}`);
+        //         return;
+        //     }
+        //     socket.join('ownerRoom');
+        //     // socket.ownerId = ownerId; // Attach ownerId to socket instance
+        //     console.log(`Owner joined room with ID: ${ownerId}`);
+        // });
 
+        socket.on('connectOwner', (ownerID)=>{
+            socket.join(ownerID)
+            console.log(`Welcome to my room ${ownerID}`)
+        })
+        
         // Handle disconnect
         socket.on("disconnect", () => {
             console.log(`User disconnected: ${socket.id}`);

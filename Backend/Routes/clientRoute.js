@@ -40,4 +40,8 @@ router.get('/me', userTokenAuth, async(req,res)=>{
     if(!data)return res.status(404).json({message:'User Not Found!!'})
     res.json(data)
 })
+router.delete('/del', async (req,res)=>{
+    const del = await userModel.deleteMany()
+    res.json(del)
+})
 module.exports = router
